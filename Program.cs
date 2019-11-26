@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NewCodigoCesar
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
 
@@ -39,47 +41,50 @@ namespace NewCodigoCesar
             }
             else if (Programa.Equals("S"))
             {
-                Console.WriteLine("Cerrando aplicación");
-                Console.ReadLine();
+                Console.WriteLine("Cerrando aplicación...");
+                Thread.Sleep(1000);
                 Environment.Exit(0);
             }
             else
             {
-                
-                Console.WriteLine("Valor incorrecto!!!");
-                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Valor incorrecto!!! Responda C , D , S");
+                Thread.Sleep(2000);
+                Console.Clear();
                 menuPrincipal();
-                //Environment.Exit(0);
+               
 
             }
             return Programa;
         }
         public static string PideMensaje()
         {
-            int longitud = 0;
-            string mensaje = "";
-
+           int longitud = -1;
+            string mensaje;
             do
             {
+                if (longitud != -1)
+                {
+                    Console.WriteLine("Valor incorrecto! Vuelva a intentarlo.");
+                }
                 //Pedir mensaje
-
+                Console.WriteLine("Introduzca el mensaje");
                 mensaje = Console.ReadLine();
                 char[] Caracteres = mensaje.ToCharArray();
                 longitud = Caracteres.Length;
+                Console.WriteLine($"Longitud: {longitud} ");
             }
-            while (longitud > 30);
-            // Console.WriteLine("Mensaje ok");
-
+            while (longitud > 30 || longitud == 0);
             return mensaje;
-
         }
+
         public static int PideValorDesplazamiento()
         {
             /*
-             * Método copiado y modificado desde: https://stackoverflow.com/questions/13106493/how-do-i-only-allow-number-input-into-my-c-sharp-console-application
+             * Método basado en: https://stackoverflow.com/questions/13106493/how-do-i-only-allow-number-input-into-my-c-sharp-console-application
              */
             string _val = "";
-            Console.Write("Entre un valor de desplazamiento menor a 50: ");
+            Console.Write("\nEntre un valor de desplazamiento menor a 50: ");
 
             ConsoleKeyInfo key;
 
@@ -107,7 +112,8 @@ namespace NewCodigoCesar
                 if (_val=="")
                 {
                     Console.WriteLine("\nNO PUEDES DEJAR EN BLANCO EL DESPLAZAMIENTO!!!");
-                    Console.ReadKey();
+                    Thread.Sleep(1000);
+                    
                     Console.Clear();
                     Console.WriteLine("\n\n\n****************************************************");
                     Console.WriteLine("****************************************************");
@@ -154,7 +160,7 @@ namespace NewCodigoCesar
             {
 
                 uint valorX = desplazamientoConvertido + mensaje[i];
-
+                /*
                 if (valorX > 126)
                 {
                     valorX -= 95;
@@ -162,6 +168,15 @@ namespace NewCodigoCesar
                 if (valorX < 32)
                 {
                     valorX += 95;
+                }*/
+
+                if (valorX > 'z')
+                {
+                    valorX -= 55;
+                }
+                if (valorX < 'A')
+                {
+                    valorX += 55;
                 }
 
                 char ValorConvertido = Convert.ToChar(valorX);
@@ -184,37 +199,67 @@ namespace NewCodigoCesar
                 Console.WriteLine("Valor demasiado alto");
                 desplazamiento = PideValorDesplazamiento();
             }
-            Console.Clear();
+            //Console.Clear();
             uint desplazamientoConvertido = 0;
-            //Console.WriteLine("El mensaje es: " + mensaje);
-            //Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
+            Console.WriteLine("El mensaje es: " + mensaje);
+            Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
 
             char[] Caracteres = mensaje.ToCharArray();
-            // Caracteres.Length
-            // uint longitud = Convert.ToUInt32(Caracteres.Length);
+          
             int longitud = Caracteres.Length;
             desplazamientoConvertido = Convert.ToUInt32(desplazamiento);
 
             char[] mochila = new char[longitud];
+            string resultadito = "";
             for (int i = 0; i < longitud; i++)
             {
 
                 uint valorX = mensaje[i] - desplazamientoConvertido;
+                Console.WriteLine("desplazamientoConvertidoDespues = " + desplazamientoConvertido);
+                /*
+              if (valorX > 126)
+              {
+                  valorX -= 95;
+              }
+              if (valorX < 32)
+              {
+                  valorX += 95;
+              }*/
 
-                if (valorX > 126)
+                if (valorX > 'z')
                 {
-                    valorX -= 95;
+                    valorX -= 55;
                 }
-                if (valorX < 32)
+                if (valorX < 'A')
                 {
-                    valorX += 95;
+                    valorX += 55;
+                }
+                Console.WriteLine("desplazamientoConvertidoAntes = "+ desplazamientoConvertido);
+                Console.WriteLine("Mensaje[i]= "+mensaje);
+                Console.WriteLine("valorX= "+valorX);
+                while (valorX> 4294967295)
+                {
+                Console.WriteLine("Imposible decodificar, codifique de nuevo");
+                    Thread.Sleep(3000);
+
+                    menuPrincipal();
+                }
+                while (valorX <0)
+                {
+                    Console.WriteLine("bAJO CEROOOOOOOOOOOOOOOOO");
+                    Thread.Sleep(3000);
+
+                    menuPrincipal();
                 }
 
                 char ValorConvertido = Convert.ToChar(valorX);
+                //string variableCadena = Convert.ToString(valorX);
                 mochila[i] = ValorConvertido;
 
 
+                resultadito += valorX;
             }
+            
             Console.Write("\nRESULTADO: ");
             Console.WriteLine(mochila);
             //Console.ReadLine();
