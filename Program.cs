@@ -9,14 +9,14 @@ namespace NewCodigoCesar
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
 
             Console.WriteLine("Realizar un programa que encripte un texto mediante el cifrado César. \n" +
                "El usuario introducirá el texto, y el número de desplazamiento.");
             string Programa = menuPrincipal();
-                        
+
         }
         static string menuPrincipal()
         {
@@ -52,14 +52,12 @@ namespace NewCodigoCesar
                 Thread.Sleep(2000);
                 Console.Clear();
                 menuPrincipal();
-               
-
             }
             return Programa;
         }
         public static string PideMensaje()
         {
-           int longitud = -1;
+            int longitud = -1;
             string mensaje;
             do
             {
@@ -109,11 +107,11 @@ namespace NewCodigoCesar
                         Console.Write("\b \b");
                     }
                 }
-                if (_val=="")
+                if (_val == "")
                 {
                     Console.WriteLine("\nNO PUEDES DEJAR EN BLANCO EL DESPLAZAMIENTO!!!");
                     Thread.Sleep(1000);
-                    
+
                     Console.Clear();
                     Console.WriteLine("\n\n\n****************************************************");
                     Console.WriteLine("****************************************************");
@@ -123,13 +121,13 @@ namespace NewCodigoCesar
 
                     menuPrincipal();
                 }
-                
+
             }
             // Stops Receving Keys Once Enter is Pressed
             while (key.Key != ConsoleKey.Enter);
 
 
-           // Console.WriteLine("El valor entregado es: " + _val);
+            // Console.WriteLine("El valor entregado es: " + _val);
             int retorno = Convert.ToInt32(_val);
             //Console.WriteLine("El valor de retorno será: " + retorno);
             return retorno;
@@ -140,7 +138,7 @@ namespace NewCodigoCesar
             Console.WriteLine("Introduce el mensaje a cifrar (Máx 30 Caracteres)");
             string mensaje = PideMensaje();
             int desplazamiento = PideValorDesplazamiento();
-            while (desplazamiento<1||desplazamiento>50)
+            while (desplazamiento < 1 || desplazamiento > 50)
             {
                 desplazamiento = PideValorDesplazamiento();
             }
@@ -154,29 +152,40 @@ namespace NewCodigoCesar
             // uint longitud = Convert.ToUInt32(Caracteres.Length);
             int longitud = Caracteres.Length;
             desplazamientoConvertido = Convert.ToUInt32(desplazamiento);
+            string Clasificacion = "";
+
 
             char[] mochila = new char[longitud];
+
             for (int i = 0; i < longitud; i++)
             {
+                char LetraIn = mensaje[i];
+                uint valorX = mensaje[i] + desplazamientoConvertido;
 
-                uint valorX = desplazamientoConvertido + mensaje[i];
-                /*
-                if (valorX > 126)
+                //Mayusculas
+                if (LetraIn >= 'A' && LetraIn <= 'Z')
                 {
-                    valorX -= 95;
+                    Clasificacion = "Mayuscula";
                 }
-                if (valorX < 32)
+                //Minusculas
+                else if (LetraIn >= 'a' && LetraIn <= 'z')
                 {
-                    valorX += 95;
-                }*/
+                    Clasificacion = "Minuscula";
+                }
+                else
+                {
+                    Clasificacion = "Desconocida";
+                    Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
+                }
+                if (Clasificacion == "Mayuscula")
+                {
+                    if (valorX > 'Z')
+                    {
 
-                if (valorX > 'z')
-                {
-                    valorX -= 55;
-                }
-                if (valorX < 'A')
-                {
-                    valorX += 55;
+                        valorX -= 'Z';
+                        valorX += 'A'-1;
+                        Console.WriteLine("ValorX= " + valorX);
+                    }
                 }
 
                 char ValorConvertido = Convert.ToChar(valorX);
@@ -194,7 +203,7 @@ namespace NewCodigoCesar
             Console.WriteLine("Introduce el mensaje a decifrar (Máx 30 Caracteres)");
             string mensaje = PideMensaje();
             int desplazamiento = PideValorDesplazamiento();
-            while (desplazamiento>50)
+            while (desplazamiento > 50)
             {
                 Console.WriteLine("Valor demasiado alto");
                 desplazamiento = PideValorDesplazamiento();
@@ -205,67 +214,57 @@ namespace NewCodigoCesar
             Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
 
             char[] Caracteres = mensaje.ToCharArray();
-          
+
             int longitud = Caracteres.Length;
             desplazamientoConvertido = Convert.ToUInt32(desplazamiento);
 
+            string Clasificacion = "";
+
+
             char[] mochila = new char[longitud];
-            string resultadito = "";
+
             for (int i = 0; i < longitud; i++)
             {
-
+                char LetraIn = mensaje[i];
                 uint valorX = mensaje[i] - desplazamientoConvertido;
-                Console.WriteLine("desplazamientoConvertidoDespues = " + desplazamientoConvertido);
-                /*
-              if (valorX > 126)
-              {
-                  valorX -= 95;
-              }
-              if (valorX < 32)
-              {
-                  valorX += 95;
-              }*/
 
-                if (valorX > 'z')
+                //Mayusculas
+                if (LetraIn >= 'A' && LetraIn <= 'Z')
                 {
-                    valorX -= 55;
+                    Clasificacion = "Mayuscula";
                 }
-                if (valorX < 'A')
+                //Minusculas
+                else if (LetraIn >= 'a' && LetraIn <= 'z')
                 {
-                    valorX += 55;
+                    Clasificacion = "Minuscula";
                 }
-                Console.WriteLine("desplazamientoConvertidoAntes = "+ desplazamientoConvertido);
-                Console.WriteLine("Mensaje[i]= "+mensaje);
-                Console.WriteLine("valorX= "+valorX);
-                while (valorX> 4294967295)
+                else
                 {
-                Console.WriteLine("Imposible decodificar, codifique de nuevo");
-                    Thread.Sleep(3000);
-
-                    menuPrincipal();
+                    Clasificacion = "Desconocida";
+                    Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
                 }
-                while (valorX <0)
+                if (Clasificacion == "Mayuscula")
                 {
-                    Console.WriteLine("bAJO CEROOOOOOOOOOOOOOOOO");
-                    Thread.Sleep(3000);
-
-                    menuPrincipal();
+                    if (valorX < 'A')
+                    {
+                        valorX= valorX - 'A';
+                        valorX= valorX + 'Z' + 1;
+                      
+                        Console.WriteLine("ValorX= " + valorX);
+                    }
                 }
 
                 char ValorConvertido = Convert.ToChar(valorX);
-                //string variableCadena = Convert.ToString(valorX);
                 mochila[i] = ValorConvertido;
 
-
-                resultadito += valorX;
             }
-            
+
             Console.Write("\nRESULTADO: ");
             Console.WriteLine(mochila);
             //Console.ReadLine();
             menuPrincipal();
         }
-        
+
         //Video de Referancia
         //https://www.youtube.com/watch?v=De9ZLfGIM18
     }
