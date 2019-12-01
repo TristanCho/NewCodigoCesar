@@ -181,16 +181,24 @@ namespace NewCodigoCesar
                 {
                     if (valorX > 'Z')
                     {
-
                         valorX -= 'Z';
-                        valorX += 'A'-1;
-                        Console.WriteLine("ValorX= " + valorX);
+                        valorX += 'A' - 1;
+                        // Console.WriteLine("ValorX= " + valorX);
+                    }
+                }
+
+                if (Clasificacion == "Minuscula")
+                {
+                    if (valorX > 'z')
+                    {
+                        valorX -= 'z';
+                        valorX += 'a' - 1;
+                        Console.WriteLine("ValorX= " + valorX);// Cifrado
                     }
                 }
 
                 char ValorConvertido = Convert.ToChar(valorX);
                 mochila[i] = ValorConvertido;
-
 
             }
             Console.Write("\nRESULTADO: ");
@@ -203,12 +211,7 @@ namespace NewCodigoCesar
             Console.WriteLine("Introduce el mensaje a decifrar (Máx 30 Caracteres)");
             string mensaje = PideMensaje();
             int desplazamiento = PideValorDesplazamiento();
-            while (desplazamiento > 50)
-            {
-                Console.WriteLine("Valor demasiado alto");
-                desplazamiento = PideValorDesplazamiento();
-            }
-            //Console.Clear();
+
             uint desplazamientoConvertido = 0;
             Console.WriteLine("El mensaje es: " + mensaje);
             Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
@@ -247,12 +250,28 @@ namespace NewCodigoCesar
                 {
                     if (valorX < 'A')
                     {
-                        valorX= valorX - 'A';
-                        valorX= valorX + 'Z' + 1;
-                      
-                        Console.WriteLine("ValorX= " + valorX);
+                        valorX = valorX - 'A';
+                        valorX = valorX + 'Z' + 1;
+
+                        //Console.WriteLine("ValorX= " + valorX);
                     }
                 }
+                if (Clasificacion == "Minuscula")
+                {
+                    if (valorX < 'a')
+                    {
+                        valorX += 'a';
+                        valorX -= LetraIn;
+                        valorX -= 1;
+                    }
+                    if (valorX > 'z')
+                    {
+                        valorX += 'a';
+                        valorX -= LetraIn;
+                        valorX -= 1;
+                    }
+                }
+              
 
                 char ValorConvertido = Convert.ToChar(valorX);
                 mochila[i] = ValorConvertido;
