@@ -9,7 +9,6 @@ namespace NewCodigoCesar
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             Console.WriteLine("Realizar un programa que encripte un texto mediante el cifrado César. \n" +
@@ -67,7 +66,7 @@ namespace NewCodigoCesar
                 mensaje = Console.ReadLine();
                 char[] Caracteres = mensaje.ToCharArray();
                 longitud = Caracteres.Length;
-                Console.WriteLine($"Longitud: {longitud} ");
+               // Console.WriteLine($"Longitud: {longitud} ");
             }
             while (longitud > 350 || longitud == 0);
             return mensaje;
@@ -132,6 +131,7 @@ namespace NewCodigoCesar
             string mensaje = PideMensaje();
             int desplazamiento = PideValorDesplazamiento();
             int modulo = desplazamiento;
+            int ajuste = 3;
 
             while (desplazamiento < 1)
             {
@@ -141,12 +141,13 @@ namespace NewCodigoCesar
             {
                 int division = desplazamiento / 13;
                 modulo = desplazamiento % 13;
+               
                 // Console.WriteLine("Division = " + division);
-                //Console.WriteLine("Modulo = " + modulo);
+                Console.WriteLine("Modulo = " + modulo);
             }
             uint desplazamientoConvertido = 0;
             //Console.WriteLine("El mensaje es: " + mensaje);
-            // Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
+            //Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
 
             char[] Caracteres = mensaje.ToCharArray();
             // Caracteres.Length
@@ -174,7 +175,7 @@ namespace NewCodigoCesar
                 else
                 {
                     Clasificacion = "Desconocida";
-                   // Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
+                    // Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
                 }
                 if (Clasificacion == "Mayuscula")
                 {
@@ -208,10 +209,11 @@ namespace NewCodigoCesar
         }
         static void DesCifrado()
         {
-            Console.WriteLine("Introduce el mensaje a descifrar (Máx 30 Caracteres)");
+            Console.WriteLine("Introduce el mensaje a descifrar");
             string mensaje = PideMensaje();
             int desplazamiento = PideValorDesplazamiento();
             int modulo = desplazamiento;
+            int ajuste = 3;
 
             while (desplazamiento < 1)
             {
@@ -221,13 +223,16 @@ namespace NewCodigoCesar
             {
                 int division = desplazamiento / 13;
                 modulo = desplazamiento % 13;
-                Console.WriteLine("Division = " + division);
-                Console.WriteLine("Modulo = " + modulo);
+              
+              //  division = desplazamiento / 13;
+               // modulo = desplazamiento % 13;
             }
 
             uint desplazamientoConvertido = 0;
             // Console.WriteLine("El mensaje es: " + mensaje);
-            Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
+           // Console.WriteLine("El valor de desplazamiento es: " + desplazamiento);
+            Convert.ToUInt32(modulo);
+           // Console.WriteLine("El valor de Modulo es: " + modulo);
             char[] Caracteres = mensaje.ToCharArray();
             int longitud = Caracteres.Length;
             desplazamientoConvertido = Convert.ToUInt32(modulo);
