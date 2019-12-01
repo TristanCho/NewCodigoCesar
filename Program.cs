@@ -174,7 +174,7 @@ namespace NewCodigoCesar
                 else
                 {
                     Clasificacion = "Desconocida";
-                    Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
+                   // Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
                 }
                 if (Clasificacion == "Mayuscula")
                 {
@@ -253,7 +253,7 @@ namespace NewCodigoCesar
                 else
                 {
                     Clasificacion = "Desconocida";
-                    Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
+                    //Console.WriteLine("LetraIn fuera de rango =" + LetraIn);
                 }
                 if (Clasificacion == "Mayuscula")
                 {
